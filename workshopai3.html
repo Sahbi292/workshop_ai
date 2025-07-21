@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Card Component Demo</title>
+  <style>
+    .pricing {
+      width: 300px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px #ccc;
+      padding: 10px;
+      text-align: left;
+      border-radius: 8px;
+    }
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .price {
+      font-size: 18px;
+      color: green;
+    }
+    .features {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+    .features li {
+      padding: 4px;
+      border-bottom: 1px solid #eee;
+    }
+    .btn {
+      background: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin-top: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+<div id="cards-container"></div>
+
+<script>
+  /**
+   * Crée une carte de tarification et l'ajoute au conteneur.
+   * @param {string} title - Le titre de la carte.
+   * @param {string} price - Le prix à afficher.
+   * @param {string[]} features - Liste des fonctionnalités.
+   * @param {string} buttonLabel - Texte du bouton.
+   * @param {function} onButtonClick - Fonction appelée au clic du bouton.
+   */
+  function createCard(title, price, features, buttonLabel, onButtonClick) {
+    const card = document.createElement('div');
+    card.className = 'pricing';
+
+    const h2 = document.createElement('h2');
+    h2.className = 'title';
+    h2.textContent = title;
+    card.appendChild(h2);
+
+    const p = document.createElement('p');
+    p.className = 'price';
+    p.textContent = price;
+    card.appendChild(p);
+
+    const ul = document.createElement('ul');
+    ul.className = 'features';
+    features.forEach(feature => {
+      const li = document.createElement('li');
+      li.textContent = feature;
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
+
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.type = 'button';
+    btn.textContent = buttonLabel;
+    btn.onclick = onButtonClick;
+    card.appendChild(btn);
+
+    document.getElementById('cards-container').appendChild(card);
+  }
+
+  // Exemple d'utilisation :
+  createCard(
+    "Forfait de base",
+    "9,99 $/mois",
+    [
+      "1 Go de stockage",
+      "Assistance de base",
+      "Toutes les fonctionnalités principales"
+    ],
+    "Démarrer l'essai",
+    function() { alert("Essai démarré !"); }
+  );
+
+  // Vous pouvez créer d'autres cartes en appelant createCard avec d'autres arguments.
+  // Exemple :
+  // createCard("Pro", "19,99 $/mois", ["10 Go de stockage", "Support prioritaire"], "Choisir", function() { ... });
+</script>
+
+</body>
+</html>
